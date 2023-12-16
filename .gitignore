@@ -1,0 +1,4 @@
+mysite/mysite/__pycache__
+mysite/boards/__pycache__
+mysite/boards/migrations/__pycache__
+venv
