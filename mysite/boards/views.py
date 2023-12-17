@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 
 from .models import Board, Column, Task
@@ -15,30 +15,10 @@ def index(request):
     }
     return render(request, "boards/index.html", context)
 
-def create(request, board_id, column_id):
+def create(request, column_id):
     Task.objects.create(title=request.POST["title"], description=request.POST["description"], column_id=column_id)
-    
-    board = Board.objects.get(name="Проект трелло")
-    columns = Column.objects.filter(board=board)
-    tasks = Task.objects.filter(column_id__in=columns.values_list("id"))
-
-    context = {
-        "board": board,
-        "columns": columns,
-        "tasks": tasks,
-    }
-    return render(request, "boards/index.html", context)
+    return redirect('index')
 
 def delete(request, task_id):
     Task.objects.get(id=task_id).delete()
-
-    board = Board.objects.get(name="Проект трелло")
-    columns = Column.objects.filter(board=board)
-    tasks = Task.objects.filter(column_id__in=columns.values_list("id"))
-
-    context = {
-        "board": board,
-        "columns": columns,
-        "tasks": tasks,
-    }
-    return render(request, "boards/index.html", context)
+    return redirect('index')
