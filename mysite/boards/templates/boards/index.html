@@ -1,0 +1,35 @@
+<div class="board" style="border: 1px solid #000; padding: 15px; ">
+    <h2>{{ board.name }}</h2>
+
+    <div class="columns" style="display: flex;">
+    {% for column in columns %}
+        <div class="column" style="border: 1px solid #000; padding: 15px; margin: 10px;">
+            <h3>{{ column.name }}</h3>
+
+            {% if tasks is None %}
+                <p>Пока нет заданий</p>
+            {% else %}
+                <ul>
+                    {% for task in tasks %}
+                        {% if task.column_id == column.id %}
+                            <li>{{ task.title }}<p>{{ task.description }}</p>
+                                <a href="{% url 'delete' task.id %}">Удалить</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post" action="{% url 'create' board.id column.id %}" style="border: 1px solid #000; padding: 15px; margin: 10px;">
+                {% csrf_token %}
+                <h4>Создание таски</h4>
+                <p>Заголовок<input type="text" name="title"></p>
+                <p>Описание
+                    <textarea name="description" id="" cols="30" rows="10"></textarea>
+                </p>
+                <button type="submit">Создать таску</button>
+            </form>
+        </div>
+    {% endfor %}
+    </div>
+</div>

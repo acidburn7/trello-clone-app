@@ -10,7 +10,7 @@ class Board(models.Model):
 
 class Column(models.Model):
     name = models.CharField(max_length=250)
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="boards_columns")
 
     def __str__(self):
         return self.name
@@ -21,7 +21,8 @@ class Task(models.Model):
     description = models.TextField()
     created = models.DateTimeField(auto_now=True)
 
-    column = models.ForeignKey(Column, on_delete=models.CASCADE)
+    column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name="boards_tasks")
 
     def __str__(self):
         return self.title
+
