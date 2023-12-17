@@ -1,35 +1,50 @@
-<div class="board" style="border: 1px solid #000; padding: 15px; ">
-    <h2>{{ board.name }}</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-    <div class="columns" style="display: flex;">
-    {% for column in columns %}
-        <div class="column" style="border: 1px solid #000; padding: 15px; margin: 10px;">
-            <h3>{{ column.name }}</h3>
-
-            {% if tasks is None %}
-                <p>Пока нет заданий</p>
-            {% else %}
-                <ul>
+    {% load static %}
+    <!--<link rel="stylesheet" href="{% static 'boards/assets/bootstrap/css/bootstrap-grid.css' %}">-->
+    <link rel="stylesheet" href="{% static 'boards/css/style.css' %}">
+</head>
+<body>
+    <div class="board">
+        <h2>Доска: {{ board.name }}</h2>
+    
+        <div class="columns">
+        {% for column in columns %}
+            <div class="column">
+                <h3>{{ column.name }}</h3>
+    
+                {% if tasks is None %}
+                    <p>Пока нет заданий</p>
+                {% else %}
                     {% for task in tasks %}
                         {% if task.column_id == column.id %}
-                            <li>{{ task.title }}<p>{{ task.description }}</p>
+                            <div class="task">{{ task.title }}
                                 <a href="{% url 'delete' task.id %}">Удалить</a>
-                            </li>
+                            </div>
                         {% endif %}
                     {% endfor %}
-                </ul>
-            {% endif %}
-
-            <form method="post" action="{% url 'create' column.id %}" style="border: 1px solid #000; padding: 15px; margin: 10px;">
-                {% csrf_token %}
-                <h4>Создание таски</h4>
-                <p>Заголовок<input type="text" name="title"></p>
-                <p>Описание
-                    <textarea name="description" id="" cols="30" rows="10"></textarea>
-                </p>
-                <button type="submit">Создать таску</button>
-            </form>
+                {% endif %}
+    
+                <form method="post" action="{% url 'create' column.id %}" style="border: 1px solid #000; padding: 15px; margin: 10px;">
+                    {% csrf_token %}
+                    <h4>Создание таски</h4>
+                    <p>Заголовок<input type="text" name="title"></p>
+                    <p>Описание
+                        <textarea name="description" id="" cols="30" rows="10"></textarea>
+                    </p>
+                    <button type="submit">Создать таску</button>
+                </form>
+            </div>
+        {% endfor %}
         </div>
-    {% endfor %}
     </div>
-</div>
+    <!--<link rel="stylesheet" href="{% static 'boards/assets/bootstrap/js/bootstrap.js' %}">-->
+</body>
+</html>
+
+

@@ -1,0 +1,38 @@
+body, html {
+    height: 100%;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    background-color: rgb(45 212 191);
+    color: #fff;
+    height: 100%;
+}
+
+.board {
+    padding: 15px; 
+}
+
+.columns {
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+
+.column {
+    border-radius: 15px;
+    box-shadow: 1px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 25px; 
+    margin-right: 25px;
+    border: 1px solid #fff;
+}
+
+.task {
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: 1px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+}
