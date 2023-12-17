@@ -14,33 +14,45 @@
         <h2>Доска: {{ board.name }}</h2>
     
         <div class="columns">
-        {% for column in columns %}
-            <div class="column">
-                <h3>{{ column.name }}</h3>
-    
-                {% if tasks is None %}
-                    <p>Пока нет заданий</p>
-                {% else %}
-                    {% for task in tasks %}
-                        {% if task.column_id == column.id %}
-                            <div class="task">{{ task.title }}
-                                <a href="{% url 'delete' task.id %}">Удалить</a>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-    
-                <form method="post" action="{% url 'create' column.id %}" style="border: 1px solid #000; padding: 15px; margin: 10px;">
+            {% for column in columns %}
+                <div class="column">
+                    <h3>{{ column.name }}</h3>
+        
+                    {% if tasks is None %}
+                        <p>Пока нет заданий</p>
+                    {% else %}
+                        {% for task in tasks %}
+                            {% if task.column_id == column.id %}
+                                <div class="task">{{ task.title }}
+                                    <a class="button button-delete" href="{% url 'delete' task.id %}">
+                                        <img class="task-delete-icon" src="{% static 'boards/assets/icons/trash.svg' %}" width="20" alt="">
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+        
+                    <form class="create-form" method="post" action="{% url 'create-task' column.id %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="create-form-button">
+                            <img class="task-delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
+                        </button>
+                        <input class="create-form-input" type="text" name="title" placeholder="Введите текст">
+                    </form>
+                </div>
+            {% endfor %}
+
+            <div class="column column--new">
+                <form class="create-form create-form--create-board" method="post" action="{% url 'create-column' board.id %}">
                     {% csrf_token %}
-                    <h4>Создание таски</h4>
-                    <p>Заголовок<input type="text" name="title"></p>
-                    <p>Описание
-                        <textarea name="description" id="" cols="30" rows="10"></textarea>
-                    </p>
-                    <button type="submit">Создать таску</button>
+                    
+                    <button type="submit" class="create-form-button create-form-button--transparent">
+                        <img class="task-delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
+                    </button>
+                    <input class="create-form-input" type="text" name="title" placeholder="Добавьте ещё одну колонку">
                 </form>
             </div>
-        {% endfor %}
         </div>
     </div>
     <!--<link rel="stylesheet" href="{% static 'boards/assets/bootstrap/js/bootstrap.js' %}">-->

@@ -15,8 +15,12 @@ def index(request):
     }
     return render(request, "boards/index.html", context)
 
-def create(request, column_id):
-    Task.objects.create(title=request.POST["title"], description=request.POST["description"], column_id=column_id)
+def create_task(request, column_id):
+    Task.objects.create(title=request.POST["title"], description="", column_id=column_id)
+    return redirect('index')
+
+def create_column(request, column_id):
+    Task.objects.create(title=request.POST["title"], description="", column_id=column_id)
     return redirect('index')
 
 def delete(request, task_id):

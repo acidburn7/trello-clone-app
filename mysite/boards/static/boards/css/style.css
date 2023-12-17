@@ -16,23 +16,66 @@ body, html {
 .columns {
     display: flex;
     flex-wrap: nowrap;
-
+    align-items: flex-start;
 }
 
 .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-radius: 15px;
     box-shadow: 1px;
-    background-color: #fff;
+    background-color: #f1f2f4;
     color: #000;
     padding: 10px 25px; 
     margin-right: 25px;
     border: 1px solid #fff;
 }
 
+.column--new {
+    background-color: #A6C5E229;
+}
+
 .task {
-    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #bdc2cc;
+    background-color: #fff;
     border-radius: 15px;
     box-shadow: 1px;
     margin-bottom: 15px;
     padding: 10px 15px;
+}
+
+.task-delete-icon {
+    vertical-align: baseline;
+}
+
+.create-form {
+    display: flex;
+    border: none;
+    padding: 15px; 
+    margin: 10px;
+    color: #172b4d;
+}
+
+.create-form-button {
+    border: none;
+}
+
+.create-form-input {
+    background-color: #091E4224;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+
+.create-form--create-board {
+    border: none;
+    
+}
+
+.create-form-button--transparent {
+    background-color: transparent;
 }
