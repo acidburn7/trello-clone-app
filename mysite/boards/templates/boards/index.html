@@ -7,7 +7,12 @@
 
     {% load static %}
     <!--<link rel="stylesheet" href="{% static 'boards/assets/bootstrap/css/bootstrap-grid.css' %}">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'boards/css/style.css' %}">
+
+    <!--<script src="{% static 'boards/assets/bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'boards/assets/bootstrap/js/bootstrap.bundle.js' %}"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="board">
@@ -23,7 +28,8 @@
                     {% else %}
                         {% for task in tasks %}
                             {% if task.column_id == column.id %}
-                                <div class="task">{{ task.title }}
+                                <div class="task" data-bs-toggle="modal" data-bs-target=".task-modal" data-bs-id="{{ task.id }}"  data-bs-title="{{ task.title}}"  data-bs-description="{{ task.description}}">
+                                    {{ task.title }}
                                     <a class="button button-delete" href="{% url 'delete' task.id %}">
                                         <img class="task-delete-icon" src="{% static 'boards/assets/icons/trash.svg' %}" width="20" alt="">
                                     </a>
@@ -55,7 +61,42 @@
             </div>
         </div>
     </div>
-    <!--<link rel="stylesheet" href="{% static 'boards/assets/bootstrap/js/bootstrap.js' %}">-->
+
+  <!-- Modal -->
+  <div class="modal fade task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="task-modal__title" style="color: #000;">Modal title</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <textarea  class="task-modal__description" name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          <button type="button" class="btn btn-primary">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+        var taskModal = document.querySelector('.task-modal')
+        taskModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            var id = button.getAttribute('data-bs-id')
+            var title = button.getAttribute('data-bs-title')
+            var description = button.getAttribute('data-bs-description')
+
+            var modalTitle = taskModal.querySelector('.task-modal__title')
+            var modalBodyInput = taskModal.querySelector('.task-modal__description')
+
+            modalTitle.textContent = title
+            modalBodyInput.value = description
+        })
+    </script>
+    
 </body>
 </html>
 

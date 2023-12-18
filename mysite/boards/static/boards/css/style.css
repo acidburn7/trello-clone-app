@@ -4,7 +4,8 @@ body, html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     
-    background-color: rgb(45 212 191);
+    /* background-color: rgb(45 212 191); */
+    background: linear-gradient(45deg, #37ecba, #72afd3);
     color: #fff;
     height: 100%;
 }
@@ -21,9 +22,10 @@ body, html {
 
 .column {
     display: flex;
+    width: 280px;
     flex-direction: column;
     justify-content: space-between;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 1px;
     background-color: #f1f2f4;
     color: #000;
@@ -42,7 +44,7 @@ body, html {
     justify-content: space-between;
     border: 1px solid #bdc2cc;
     background-color: #fff;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 1px;
     margin-bottom: 15px;
     padding: 10px 15px;
@@ -55,8 +57,7 @@ body, html {
 .create-form {
     display: flex;
     border: none;
-    padding: 15px; 
-    margin: 10px;
+    margin-bottom: 10px;
     color: #172b4d;
 }
 
@@ -67,8 +68,8 @@ body, html {
 .create-form-input {
     background-color: #091E4224;
     border: none;
-    border-radius: 15px;
-    padding: 10px 15px;
+    border-radius: 10px;
+    padding: 10px 0;
 }
 
 .create-form--create-board {
