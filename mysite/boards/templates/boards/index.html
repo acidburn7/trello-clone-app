@@ -21,8 +21,13 @@
         <div class="columns">
             {% for column in columns %}
                 <div class="column">
-                    <h3>{{ column.name }}</h3>
-        
+                    <div class="column-title">
+                        <h3>{{ column.name }}</h3>
+                        <a class="button button-delete" href="{% url 'delete-column' column.id %}">
+                            <img class="delete-icon" src="{% static 'boards/assets/icons/trash.svg' %}" width="20" alt="">
+                        </a>
+                    </div>
+                    
                     {% if tasks is None %}
                         <p>Пока нет заданий</p>
                     {% else %}
@@ -31,7 +36,7 @@
                                 <div class="task" data-bs-toggle="modal" data-bs-target=".task-modal" data-bs-id="{{ task.id }}"  data-bs-title="{{ task.title}}"  data-bs-description="{{ task.description}}">
                                     {{ task.title }}
                                     <a class="button button-delete" href="{% url 'delete' task.id %}">
-                                        <img class="task-delete-icon" src="{% static 'boards/assets/icons/trash.svg' %}" width="20" alt="">
+                                        <img class="delete-icon" src="{% static 'boards/assets/icons/trash.svg' %}" width="20" alt="">
                                     </a>
                                 </div>
                             {% endif %}
@@ -42,7 +47,7 @@
                         {% csrf_token %}
 
                         <button type="submit" class="create-form-button">
-                            <img class="task-delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
+                            <img class="delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
                         </button>
                         <input class="create-form-input" type="text" name="title" placeholder="Введите текст">
                     </form>
@@ -54,9 +59,9 @@
                     {% csrf_token %}
                     
                     <button type="submit" class="create-form-button create-form-button--transparent">
-                        <img class="task-delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
+                        <img class="delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
                     </button>
-                    <input class="create-form-input" type="text" name="title" placeholder="Добавьте ещё одну колонку">
+                    <input class="create-form-input" type="text" name="name" placeholder="Добавьте ещё одну колонку">
                 </form>
             </div>
         </div>

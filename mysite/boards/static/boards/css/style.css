@@ -34,6 +34,14 @@ body, html {
     border: 1px solid #fff;
 }
 
+.column-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .column--new {
     background-color: #A6C5E229;
 }
@@ -50,7 +58,7 @@ body, html {
     padding: 10px 15px;
 }
 
-.task-delete-icon {
+.delete-icon {
     vertical-align: baseline;
 }
 
