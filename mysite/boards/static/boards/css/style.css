@@ -11,7 +11,12 @@ body, html {
 }
 
 .board {
-    padding: 15px; 
+    padding: 25px 50px; 
+}
+
+.board__title {
+    margin-top: 35px;
+    margin-bottom: 35px;
 }
 
 .columns {
@@ -71,13 +76,6 @@ body, html {
 
 .create-form-button {
     border: none;
-}
-
-.create-form-input {
-    background-color: #091E4224;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 0;
 }
 
 .create-form--create-board {

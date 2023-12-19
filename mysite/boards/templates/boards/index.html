@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="board">
-        <h2>Доска: {{ board.name }}</h2>
+        <h2 class="board__title"><b>Доска: {{ board.name }}</b></h2>
     
         <div class="columns">
             {% for column in columns %}
@@ -28,29 +28,40 @@
                         </a>
                     </div>
                     
-                    {% if tasks is None %}
-                        <p>Пока нет заданий</p>
-                    {% else %}
-                        {% for task in tasks %}
-                            {% if task.column_id == column.id %}
-                                <div class="task" data-bs-toggle="modal" data-bs-target=".task-modal" data-bs-id="{{ task.id }}"  data-bs-title="{{ task.title}}"  data-bs-description="{{ task.description}}">
-                                    {{ task.title }}
-                                    <a class="button button-delete" href="{% url 'delete' task.id %}">
-                                        <img class="delete-icon" src="{% static 'boards/assets/icons/trash.svg' %}" width="20" alt="">
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-        
-                    <form class="create-form" method="post" action="{% url 'create-task' column.id %}">
-                        {% csrf_token %}
+                    <div class="column-task">
+                        {% if tasks is None %}
+                            <p>Пока нет заданий</p>
+                        {% else %}
+                            {% for task in tasks %}
+                                {% if task.column_id == column.id %}
+                                    <div class="task" 
+                                        id="task-{{ task.id }}"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target=".task-modal" 
+                                        data-bs-id="{{ task.id }}"  
+                                        data-bs-title="{{ task.title}}"  
+                                        data-bs-description="{{ task.description}}"
+                                    >
+                                        {{ task.title }}
+                                        <a class="button button-delete" href="{% url 'delete' task.id %}">
+                                            <img class="delete-icon" src="{% static 'boards/assets/icons/trash.svg' %}" width="20" alt="">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="column-form">
+                        <form class="create-form" method="post" action="{% url 'create-task' column.id %}">
+                            {% csrf_token %}
 
-                        <button type="submit" class="create-form-button">
-                            <img class="delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
-                        </button>
-                        <input class="create-form-input" type="text" name="title" placeholder="Введите текст">
-                    </form>
+                            <button type="submit" class="create-form-button">
+                                <img class="delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
+                            </button>
+                            <input class="form-control" type="text" name="title" placeholder="Введите текст">
+                        </form>
+                    </div>
                 </div>
             {% endfor %}
 
@@ -61,13 +72,13 @@
                     <button type="submit" class="create-form-button create-form-button--transparent">
                         <img class="delete-icon" src="{% static 'boards/assets/icons/plus.svg' %}" width="20" alt="">
                     </button>
-                    <input class="create-form-input" type="text" name="name" placeholder="Добавьте ещё одну колонку">
+                    <input class="form-control" type="text" name="name" placeholder="Добавьте ещё одну колонку">
                 </form>
             </div>
         </div>
     </div>
 
-  <!-- Modal -->
+  <!-- Modal 
   <div class="modal fade task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -84,7 +95,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 
     <script>
         var taskModal = document.querySelector('.task-modal')
